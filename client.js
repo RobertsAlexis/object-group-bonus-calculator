@@ -43,15 +43,66 @@ console.log('array of employee data: ',  employees );
 // This is not a race. Everyone on your team should understand what is happening.
 // Ask questions when you don't.
 
-
+let testEmployee =  {
+  name: 'Scout',
+  employeeNumber: '6243',
+  annualSalary: '74750',
+  reviewRating: 5
+};
 
 
 // This function will calculate 1 employee's bonus!
 //
-function calculateIndividualEmployeeBonus( employee ) {  
-  // your logic here
-  
-  
-  // return new object with bonus results
+function calculateIndividualEmployeeBonus( employee ) { 
+  console.log("employee info:", employee);
+   let reviewRating = employee.reviewRating;
+   let employeeName = employee.name;
 
+  // your logic here
+  let bonusRate = 0
+  switch (reviewRating){
+    case reviewRating<=2:
+      console.log("No bonus");
+      bonusRate = 0;
+      break;
+    case (3):
+      //bonus rate 4% of annual salary
+      console.log("4% bonus");
+      bonusRate = .04;
+      break;
+    case (4):
+      // bonus rate of 6% of annual salary
+      console.log("6% bonus")
+      bonusRate = .06;
+      break;
+    case (5):
+        // bonus rate of 10% of annual salary
+        console.log("10% bonus");
+        bonusRate = .1;
+        break;
+  }
+  if(employee.employeeNumber.length===4){
+    bonusRate += 0.5;
+  };
+  if(employee.annualSalary>65000){
+    bonusRate -= .01;
+  }
+  if(bonusRate>0.13){
+    bonusRate = 0.13;
+  }
+  if(bonusRate<=0){
+    bonusRate = 0;
+  }
+  console.log(bonusRate);
+  let totalBonus = Number(employee.annualSalary) * bonusRate;
+  let totalCompensation = Number(employee.annualSalary) + totalBonus;
+  console.log(employee.name);
+  // return new object with bonus results
+  return { employeeName, bonusRate, totalBonus, totalCompensation}
+
+}
+console.log("bonus for ", calculateIndividualEmployeeBonus(testEmployee));
+
+for(let employee of employees){
+  calculateIndividualEmployeeBonus(employee);
 }
